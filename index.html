@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form id="bp_form">
+            <style>
+                .input-bp {
+                    background-color: rgb(15, 15, 15);
+                    width: 300px;
+                    height: 80px;
+                    font-size: 65px;
+                    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                    color: white;
+                    border-radius: 10px 5px 10px 5px;
+                    text-decoration: none;
+                    border: 0px solid white;
+                    padding: 2px 5px;
+                    outline: none;
+                }
+                .check-bp {
+                    background-color: white;
+                    border-radius: 0px;
+                    width: 50px;
+                    height: 50px;
+                    outline: none;
+                    border: 3px solid black;
+                }
+                .submit-bp {
+                    outline: none;
+                    background-color: rgb(22, 134, 22);
+                    color: white;
+                    font-size: 45px;
+                    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                    width: 300px;
+                    height: 70px;
+                    border-radius: 10px 20px 10px 20px;
+                    border: 0px solid black;
+                    transition: all 400ms;
+                }
+
+                .submit-bp:hover {
+                    border-radius: 5px 15px 5px 15px;
+                    cursor: pointer;
+                    transition: all 400ms;
+                }
+            </style>
+            <div class="bp_form_options">
+               <input id="bp-quantity" class="input-bp" type="number" placeholder="2999999">
+               <input id="bp_row_config" class="check-bp" type="checkbox" checked>
+               <input id="bp_list_config" class="check-bp" type="checkbox">
+            </div>
+            <br><br>
+            <button id="submitButton-bp" class="submit-bp" type="submit">SUBMIT</button>
+            <script>
+                const bp_q = document.getElementById("bp-quantity")
+                bp_q.onchange = () => {
+                    if(bp_q.value > 3000000) {
+                        bp_q.value = 3000000
+                    }
+                }
+                bp_q.onkeydown = () => {
+                    if(bp_q.value > 3000000) {
+                        bp_q.value = 3000000
+                    }
+                }
+
+                bp_q.onkeyup = () => {
+                    if(bp_q.value > 3000000) {
+                        bp_q.value = 3000000
+                    }
+                }
+            </script>
+        </form>
+        <style>
+            body {
+                background-color: rgb(24, 24, 24);
+            }
+
+            .flex-des {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .flex-des .item {
+                position: relative;
+            }
+
+            .center-text {
+                position: relative;
+                color: white;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                font-size: 80px;
+                height: 20px;
+                font-weight: bold;
+            }
+            .separator {
+                text-align: center;
+                width: 100%;
+            }
+
+            .listInRow {
+                color: white;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 50px;
+                width: 350px;
+                height: 40px;
+            }
+        </style>
+        <br>
+        <div class="separator">
+            <p class="center-text">Beatpoints</p>
+            <hr size="10" width="1000px" color="white">
+        </div>
+        <br><br><br>
+        <div class="flex-des" id="bp_show"></div>
+        <script>
+            const form_bp = document.getElementById("bp_form")
+            form_bp.addEventListener("submit", async (e) => {
+                e.preventDefault()
+                const checkBx= document.getElementById('bp_row_config');
+                setFinalBP()
+                setTimeout(() => {
+                    if(checkBx.checked === true) {
+                    for (i = 0; i < document.getElementsByClassName("item").length; i++){ 
+                        document.getElementsByClassName("item")[i].parentElement.style.margin = "0 25px"
+                        document.getElementsByClassName("item")[i].style.margin = "0px -25px"
+                    }
+                }
+                if(document.getElementById("bp_list_config").checked === true) {
+                    for (i = 0; i < document.getElementsByClassName("flex-des").length; i++){ 
+                    document.getElementsByClassName("flex-des")[i].style.display = "block";
+                }
+                }
+                }, 100);
+            })
+            function setFinalBP() {
+                const showInList = document.getElementById(`bp_list_config`)
+                const bp_array = {
+                    "0": 0,
+                    "1": 0,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0,
+                    "6": 0,
+                    "7": 0,
+                    "8": 0,
+                    "9": 0,
+                }
+                for(i = 0; i < Number(bp_q.value); i++) {
+                    bp_array[0] += 1
+                    setBP_1()
+                    setBP_2()
+                    setBP_3()
+                    setBP_4()
+                    setBP_5()
+                    setBP_6()
+                    setBP_7()
+                    setBP_8()
+                    setBP_9()
+                }
+                setTimeout(() => {
+                    var bp_to_show = document.getElementById('bp_show')
+                    var show9;
+                    var show8;
+                    var show7;
+                    var show6;
+                    var show5;
+                    var show4;
+                    var show3;
+                    var show2;
+                    var show1;
+                    var show0;
+                    bp_to_show.innerHTML = ""
+                    if(bp_array[9] > 0) {
+                        if(showInList.checked == true) {
+                            var list9 = document.createElement("div")
+                            list9.classList = "flex-des"
+                            list9.innerHTML = `<p class="listInRow">1,000,000 </p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list9)
+                            show9 = list9
+                        } else show9 = bp_to_show;
+                        const bp9_0 = document.createElement("img")
+                        bp9_0.style.zIndex = "36"
+                        bp9_0.src = "assets/beatpoints/BP_10.png"
+                        bp9_0.width = 80;
+                        bp9_0.height = 80;
+                        bp9_0.classList = "item"
+                        const bp9_1 = document.createElement("img")
+                        bp9_1.style.zIndex = "35"
+                        bp9_1.src = "assets/beatpoints/BP_10.png"
+                        bp9_1.width = 80;
+                        bp9_1.height = 80;
+                        bp9_1.classList = "item"
+                        const bp9_2 = document.createElement("img")
+                        bp9_2.style.zIndex = "34"
+                        bp9_2.src = "assets/beatpoints/BP_10.png"
+                        bp9_2.width = 80;
+                        bp9_2.height = 80;
+                        bp9_2.classList = "item"
+                        for(a = 0; a < Number(bp_array[9]); a++) {
+                            if(a == 0) {
+                                show9.appendChild(bp9_0)
+                            }
+                            if(a == 1) {
+                                show9.appendChild(bp9_1)
+                            }
+                            if(a == 2) {
+                                show9.appendChild(bp9_2)
+                            }
+                        }
+                    }
+                    if(bp_array[8] > 0) {
+                        if(showInList.checked == true) {
+                            var list8 = document.createElement("div")
+                            list8.classList = "flex-des"
+                            list8.innerHTML = `<p class="listInRow">250,000</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list8)
+                            show8 = list8
+                        } else show8 = bp_to_show;
+                        const bp8_0 = document.createElement("img")
+                        bp8_0.style.zIndex = "33"
+                        bp8_0.src = "assets/beatpoints/BP_9.png"
+                        bp8_0.width = 80;
+                        bp8_0.height = 80;
+                        bp8_0.classList = "item"
+                        const bp8_1 = document.createElement("img")
+                        bp8_1.style.zIndex = "32"
+                        bp8_1.src = "assets/beatpoints/BP_9.png"
+                        bp8_1.width = 80;
+                        bp8_1.height = 80;
+                        bp8_1.classList = "item"
+                        const bp8_2 = document.createElement("img")
+                        bp8_2.style.zIndex = "31"
+                        bp8_2.src = "assets/beatpoints/BP_9.png"
+                        bp8_2.width = 80;
+                        bp8_2.height = 80;
+                        bp8_2.classList = "item"
+                        for(a = 0; a < Number(bp_array[8]); a++) {
+                            if(a == 0) {
+                                show8.appendChild(bp8_0)
+                            }
+                            if(a == 1) {
+                                show8.appendChild(bp8_1)
+                            }
+                            if(a == 2) {
+                                show8.appendChild(bp8_2)
+                            }
+                        }
+                    }
+                    if(bp_array[7] > 0) {
+                        if(showInList.checked == true) {
+                            var list7 = document.createElement("div")
+                            list7.classList = "flex-des"
+                            list7.innerHTML = `<p class="listInRow">50,000</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list7)
+                            show7 = list7
+                        } else show7 = bp_to_show;
+                        const bp7_0 = document.createElement("img")
+                        bp7_0.style.zIndex = "30"
+                        bp7_0.src = "assets/beatpoints/BP_8.png"
+                        bp7_0.width = 80;
+                        bp7_0.height = 80;
+                        bp7_0.classList = "item"
+                        const bp7_1 = document.createElement("img")
+                        bp7_1.style.zIndex = "29"
+                        bp7_1.src = "assets/beatpoints/BP_8.png"
+                        bp7_1.width = 80;
+                        bp7_1.height = 80;
+                        bp7_1.classList = "item"
+                        const bp7_2 = document.createElement("img")
+                        bp7_2.style.zIndex = "28"
+                        bp7_2.src = "assets/beatpoints/BP_8.png"
+                        bp7_2.width = 80;
+                        bp7_2.height = 80;
+                        bp7_2.classList = "item"
+                        const bp7_3 = document.createElement("img")
+                        bp7_3.style.zIndex = "27"
+                        bp7_3.src = "assets/beatpoints/BP_8.png"
+                        bp7_3.width = 80;
+                        bp7_3.height = 80;
+                        bp7_3.classList = "item"
+                        for(a = 0; a < Number(bp_array[7]); a++) {
+                            if(a == 0) {
+                                show7.appendChild(bp7_0)
+                            }
+                            if(a == 1) {
+                                show7.appendChild(bp7_1)
+                            }
+                            if(a == 2) {
+                                show7.appendChild(bp7_2)
+                            }
+                            if(a == 3) {
+                                show7.appendChild(bp7_3)
+                            }
+                        }
+                    }
+                    if(bp_array[6] > 0) {
+                        if(showInList.checked == true) {
+                            var list6 = document.createElement("div")
+                            list6.classList = "flex-des"
+                            list6.innerHTML = `<p class="listInRow">10,000</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list6)
+                            show6 = list6
+                        } else show6 = bp_to_show;
+                        const bp6_0 = document.createElement("img")
+                       bp6_0.style.zIndex = "26"
+                        bp6_0.src = "assets/beatpoints/BP_7.png"
+                        bp6_0.width = 80;
+                        bp6_0.height = 80;
+                        bp6_0.classList = "item"
+                        const bp6_1 = document.createElement("img")
+                       bp6_1.style.zIndex = "25"
+                        bp6_1.src = "assets/beatpoints/BP_7.png"
+                        bp6_1.width = 80;
+                        bp6_1.height = 80;
+                        bp6_1.classList = "item"
+                        const bp6_2 = document.createElement("img")
+                       bp6_2.style.zIndex = "24"
+                        bp6_2.src = "assets/beatpoints/BP_7.png"
+                        bp6_2.width = 80
+                        bp6_2.height = 80
+                        bp6_2.classList = "item"
+                        const bp6_3 = document.createElement("img")
+                       bp6_3.style.zIndex = "23"
+                        bp6_3.src = "assets/beatpoints/BP_7.png"
+                        bp6_3.width = 80
+                        bp6_3.height = 80
+                        bp6_3.classList = "item"
+                        for(a = 0; a < Number(bp_array[6]); a++) {
+                            if(a == 0) {
+                                show6.appendChild(bp6_0)
+                            }
+                            if(a == 1) {
+                                show6.appendChild(bp6_1)
+                            }
+                            if(a == 2) {
+                                show6.appendChild(bp6_2)
+                            }
+                            if(a == 3) {
+                                show6.appendChild(bp6_3)
+                            }
+                        }
+                    }
+                    if(bp_array[5] > 0) {
+                        if(showInList.checked == true) {
+                            var list5 = document.createElement("div")
+                            list5.classList = "flex-des"
+                            list5.innerHTML = `<p class="listInRow">2,500</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list5)
+                            show5 = list5
+                        } else show5 = bp_to_show;
+                        const bp5_0 = document.createElement("img")
+                       bp5_0.style.zIndex = "22"
+                        bp5_0.src = "assets/beatpoints/BP_6.png"
+                        bp5_0.width = 80
+                        bp5_0.height = 80;
+                        bp5_0.classList = "item"
+                        const bp5_1 = document.createElement("img")
+                       bp5_1.style.zIndex = "21"
+                        bp5_1.src = "assets/beatpoints/BP_6.png"
+                        bp5_1.width = 80;
+                        bp5_1.height = 80;
+                        bp5_1.classList = "item"
+                        const bp5_2 = document.createElement("img")
+                       bp5_2.style.zIndex = "20"
+                        bp5_2.src = "assets/beatpoints/BP_6.png"
+                        bp5_2.width = 80;
+                        bp5_2.height = 80;
+                        bp5_2.classList = "item"
+                        for(a = 0; a < Number(bp_array[5]); a++) {
+                            if(a == 0) {
+                                show5.appendChild(bp5_0)
+                            }
+                            if(a == 1) {
+                                show5.appendChild(bp5_1)
+                            }
+                            if(a == 2) {
+                                show5.appendChild(bp5_2)
+                            }
+                        }
+                    }
+                    if(bp_array[4] > 0) {
+                        if(showInList.checked == true) {
+                            var list4 = document.createElement("div")
+                            list4.classList = "flex-des"
+                            list4.innerHTML = `<p class="listInRow">500</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list4)
+                            show4 = list4
+                        } else show4 = bp_to_show;
+                        const bp4_0 = document.createElement("img")
+                       bp4_0.style.zIndex = "19"
+                        bp4_0.src = "assets/beatpoints/BP_5.png"
+                        bp4_0.width = 80;
+                        bp4_0.height = 80;
+                        bp4_0.classList = "item"
+                        const bp4_1 = document.createElement("img")
+                       bp4_1.style.zIndex = "18"
+                        bp4_1.src = "assets/beatpoints/BP_5.png"
+                        bp4_1.width = 80;
+                        bp4_1.height = 80;
+                        bp4_1.classList = "item"
+                        const bp4_2 = document.createElement("img")
+                       bp4_2.style.zIndex = "17"
+                        bp4_2.src = "assets/beatpoints/BP_5.png"
+                        bp4_2.width = 80;
+                        bp4_2.height = 80;
+                        bp4_2.classList = "item"
+                        const bp4_3 = document.createElement("img")
+                       bp4_3.style.zIndex = "16"
+                        bp4_3.src = "assets/beatpoints/BP_5.png"
+                        bp4_3.width = 80;
+                        bp4_3.height = 80;
+                        bp4_3.classList = "item"
+                        for(a = 0; a < Number(bp_array[4]); a++) {
+                            if(a == 0) {
+                                show4.appendChild(bp4_0)
+                            }
+                            if(a == 1) {
+                                show4.appendChild(bp4_1)
+                            }
+                            if(a == 2) {
+                                show4.appendChild(bp4_2)
+                            }
+                            if(a == 3) {
+                                show4.appendChild(bp4_3)
+                            }
+                        }
+                    }
+                    if(bp_array[3] > 0) {
+                        if(showInList.checked == true) {
+                            var list3 = document.createElement("div")
+                            list3.classList = "flex-des"
+                            list3.innerHTML = `<p class="listInRow">125</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list3)
+                            show3 = list3
+                        } else show3 = bp_to_show;
+                        const bp3_0 = document.createElement("img")
+                       bp3_0.style.zIndex = "15"
+                        bp3_0.src = "assets/beatpoints/BP_4.png"
+                        bp3_0.width = 80;
+                        bp3_0.height = 80;
+                        bp3_0.classList = "item"
+                        const bp3_1 = document.createElement("img")
+                       bp3_1.style.zIndex = "14"
+                        bp3_1.src = "assets/beatpoints/BP_4.png"
+                        bp3_1.width = 80;
+                        bp3_1.height = 80;
+                        bp3_1.classList = "item"
+                        const bp3_2 = document.createElement("img")
+                       bp3_2.style.zIndex = "13"
+                        bp3_2.src = "assets/beatpoints/BP_4.png"
+                        bp3_2.width = 80;
+                        bp3_2.height = 80;
+                        bp3_2.classList = "item"
+                        for(a = 0; a < Number(bp_array[3]); a++) {
+                            if(a == 0) {
+                                show3.appendChild(bp3_0)
+                            }
+                            if(a == 1) {
+                                show3.appendChild(bp3_1)
+                            }
+                            if(a == 2) {
+                                show3.appendChild(bp3_2)
+                            }
+                        }
+                    }
+                    if(bp_array[2] > 0) {
+                        if(showInList.checked == true) {
+                            var list2 = document.createElement("div")
+                            list2.classList = "flex-des"
+                            list2.innerHTML = `<p class="listInRow">25</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list2)
+                            show2 = list2
+                        } else show2 = bp_to_show;
+                        const bp2_0 = document.createElement("img")
+                       bp2_0.style.zIndex = "12"
+                        bp2_0.src = "assets/beatpoints/BP_3.png"
+                        bp2_0.width = 80;
+                        bp2_0.height = 80;
+                        bp2_0.classList = "item"
+                        const bp2_1 = document.createElement("img")
+                       bp2_1.style.zIndex = "11"
+                        bp2_1.src = "assets/beatpoints/BP_3.png"
+                        bp2_1.width = 80;
+                        bp2_1.height = 80;
+                        bp2_1.classList = "item"
+                        const bp2_2 = document.createElement("img")
+                       bp2_2.style.zIndex = "10"
+                        bp2_2.src = "assets/beatpoints/BP_3.png"
+                        bp2_2.width = 80;
+                        bp2_2.height = 80;
+                        bp2_2.classList = "item"
+                        const bp2_3 = document.createElement("img")
+                       bp2_3.style.zIndex = "9"
+                        bp2_3.src = "assets/beatpoints/BP_3.png"
+                        bp2_3.width = 80;
+                        bp2_3.height = 80;
+                        bp2_3.classList = "item"
+                        for(a = 0; a < Number(bp_array[2]); a++) {
+                            if(a == 0) {
+                                show2.appendChild(bp2_0)
+                            }
+                            if(a == 1) {
+                                show2.appendChild(bp2_1)
+                            }
+                            if(a == 2) {
+                                show2.appendChild(bp2_2)
+                            }
+                            if(a == 3) {
+                                show2.appendChild(bp2_3)
+                            }
+                        }
+                    }
+                    if(bp_array[1] > 0) {
+                        if(showInList.checked == true) {
+                            var list1 = document.createElement("div")
+                            list1.classList = "flex-des"
+                            list1.innerHTML = `<p class="listInRow">5</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list1)
+                            show1 = list1
+                        } else show1 = bp_to_show;
+                        const bp1_0 = document.createElement("img")
+                       bp1_0.style.zIndex = "8"
+                        bp1_0.src = "assets/beatpoints/BP_2.png"
+                        bp1_0.width = 80;
+                        bp1_0.height = 80;
+                        bp1_0.classList = "item"
+                        const bp1_1 = document.createElement("img")
+                       bp1_1.style.zIndex = "7"
+                        bp1_1.src = "assets/beatpoints/BP_2.png"
+                        bp1_1.width = 80;
+                        bp1_1.height = 80;
+                        bp1_1.classList = "item"
+                        const bp1_2 = document.createElement("img")
+                       bp1_2.style.zIndex = "6"
+                        bp1_2.src = "assets/beatpoints/BP_2.png"
+                        bp1_2.width = 80;
+                        bp1_2.height = 80;
+                        bp1_2.classList = "item"
+                        const bp1_3 = document.createElement("img")
+                       bp1_3.style.zIndex = "5"
+                        bp1_3.src = "assets/beatpoints/BP_2.png"
+                        bp1_3.width = 80;
+                        bp1_3.height = 80;
+                        bp1_3.classList = "item"
+                        for(a = 0; a < Number(bp_array[1]); a++) {
+                            if(a == 0) {
+                                show1.appendChild(bp1_0)
+                            }
+                            if(a == 1) {
+                                show1.appendChild(bp1_1)
+                            }
+                            if(a == 2) {
+                                show1.appendChild(bp1_2)
+                            }
+                            if(a == 3) {
+                                show1.appendChild(bp1_3)
+                            }
+                        }
+                    }
+                    if(bp_array[0] > 0) {
+                        if(showInList.checked == true) {
+                            var list0 = document.createElement("div")
+                            list0.classList = "flex-des"
+                            list0.innerHTML = `<p class="listInRow">1</p><br>`
+                            bp_to_show.classList = ""
+                            bp_to_show.appendChild(list0)
+                            show0 = list0
+                        } else show0 = bp_to_show;
+                        const bp0_0 = document.createElement("img")
+                       bp0_0.style.zIndex = "4"
+                        bp0_0.src = "assets/beatpoints/BP_1.png"
+                        bp0_0.width = 80;
+                        bp0_0.height = 80;
+                        bp0_0.classList = "item"
+                        const bp0_1 = document.createElement("img")
+                       bp0_1.style.zIndex = "3"
+                        bp0_1.src = "assets/beatpoints/BP_1.png"
+                        bp0_1.width = 80;
+                        bp0_1.height = 80;
+                        bp0_1.classList = "item"
+                        const bp0_2 = document.createElement("img")
+                       bp0_2.style.zIndex = "2"
+                        bp0_2.src = "assets/beatpoints/BP_1.png"
+                        bp0_2.width = 80;
+                        bp0_2.height = 80;
+                        bp0_2.classList = "item"
+                        const bp0_3 = document.createElement("img")
+                       bp0_3.style.zIndex = "1"
+                        bp0_3.src = "assets/beatpoints/BP_1.png"
+                        bp0_3.width = 80;
+                        bp0_3.height = 80;
+                        bp0_3.classList = "item"
+                        for(a = 0; a < Number(bp_array[0]); a++) {
+                            if(a == 0) {
+                                show0.appendChild(bp0_0)
+                            }
+                            if(a == 1) {
+                                show0.appendChild(bp0_1)
+                            }
+                            if(a == 2) {
+                                show0.appendChild(bp0_2)
+                            }
+                            if(a == 3) {
+                                show0.appendChild(bp0_3)
+                            }
+                        }
+                    }
+                }, 100);
+                function setBP_1() {
+                    if(bp_array[0] === 5) {
+                        bp_array[0] = 0;
+                        bp_array[1] = bp_array[1] + 1
+                    }
+                }
+                function setBP_2() {
+                    if(bp_array[1] === 5) {
+                        bp_array[1] = 0;
+                        bp_array[2] = bp_array[2] + 1
+                    }
+                }
+                function setBP_3() {
+                    if(bp_array[2] === 5) {
+                        bp_array[2] = 0;
+                        bp_array[3] = bp_array[3] + 1
+                    } 
+                }
+                function setBP_4() {
+                    if(bp_array[3] === 4) {
+                        bp_array[3] = 0;
+                        bp_array[4] = bp_array[4] + 1
+                    }
+                }
+                function setBP_5() {
+                    if(bp_array[4] === 5) {
+                        bp_array[4] = 0;
+                        bp_array[5] = bp_array[5] + 1
+                    }
+                }
+                function setBP_6() {
+                    if(bp_array[5] === 4) {
+                        bp_array[5] = 0;
+                        bp_array[6] = bp_array[6] + 1
+                    }
+                }
+                function setBP_7() {
+                    if(bp_array[6] === 5) {
+                        bp_array[6] = 0;
+                        bp_array[7] = bp_array[7] + 1
+                    }
+                }
+                function setBP_8() {
+                    if(bp_array[7] === 5) {
+                        bp_array[7] = 0;
+                        bp_array[8] = bp_array[8] + 1
+                    }
+                }
+                function setBP_9() {
+                    if(bp_array[8] === 4) {
+                        bp_array[8] = 0;
+                        bp_array[9] = bp_array[9] + 1
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
